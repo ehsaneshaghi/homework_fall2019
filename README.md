@@ -1,2 +1,2 @@
 # Berkeley Deep Reinforcement Learning (Fall 2019)
-My solutions to cs285 homework.
+My solutions to CS285 homework.
