@@ -87,8 +87,8 @@ class MLPPolicy(BasePolicy):
         # HINT1: you will need to call self.sess.run
         # HINT2: the tensor we're interested in evaluating is self.sample_ac
         # HINT3: in order to run self.sample_ac, it will need observation fed into the feed_dict
-        return TODO
-
+        return self.sess.run(self.sample_ac,feed_dict={self.observations_pl:observation})[0]
+        # ?? what are other indexes of session.run
     # update/train this policy
     def update(self, observations, actions):
         raise NotImplementedError
@@ -121,10 +121,10 @@ class MLPPolicySL(MLPPolicy):
         # TODO define the loss that will be used to train this policy
         # HINT1: remember that we are doing supervised learning
         # HINT2: use tf.losses.mean_squared_error
-        self.loss = TODO
+        self.loss = tf.losses.mean_squared_error(true_actions,predicted_actions)
         self.train_op = tf.train.AdamOptimizer(self.learning_rate).minimize(self.loss)
 
     def update(self, observations, actions):
         assert(self.training, 'Policy must be created with training=True in order to perform training updates...')
-        self.sess.run(self.train_op, feed_dict={self.observations_pl: observations, self.acs_labels_na: actions})
-
+        _,loss = self.sess.run(self.train_op, feed_dict={self.observations_pl: observations, self.acs_labels_na: actions})
+        # ?? what is the value of _
