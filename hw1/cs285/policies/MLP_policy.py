@@ -127,4 +127,4 @@ class MLPPolicySL(MLPPolicy):
     def update(self, observations, actions):
         assert(self.training, 'Policy must be created with training=True in order to perform training updates...')
         _, loss = self.sess.run([self.train_op, self.loss], feed_dict={self.observations_pl: observations, self.acs_labels_na: actions})
-        #print("Loss = {}".format(loss))asdsadasdasdasdasdasdsa
+        print("Loss = {}".format(loss))

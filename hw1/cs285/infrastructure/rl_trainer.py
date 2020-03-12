@@ -180,7 +180,7 @@ class RL_Trainer(object):
 
     def train_agent(self):
         print('\nTraining agent using sampled data from replay buffer...')
-        for train_step in range(self.params['num_agent_train_steps_per_iter']):
+        for train_step in range(self.params['num_epochs_per_iter']):
 
             # TODO sample some data from the data buffer
             # HINT1: use the agent's sample function
@@ -261,4 +261,3 @@ class RL_Trainer(object):
             print('Done logging...\n\n')
 
             self.logger.flush()
-            #--------
