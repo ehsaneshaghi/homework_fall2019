@@ -157,7 +157,7 @@ class RL_Trainer(object):
 
                 # collect data, batch_size is the number of transitions you want to collect.
         if itr==0:
-            print(load_initial_expertdata)
+            print('loadn expert data from: ',load_initial_expertdata)
             with open(load_initial_expertdata, "rb") as f:
                 loaded_paths = pickle.load(f)
             return loaded_paths, 0, None
@@ -197,8 +197,9 @@ class RL_Trainer(object):
         # TODO relabel collected obsevations (from our policy) with labels from an expert policy
         # HINT: query the policy (using the get_action function) with paths[i]["observation"]
         # and replace paths[i]["action"] with these expert labels
-        for i in range(len(paths)):
-            paths[i]["action"] = expert_policy.get_action(paths[i]["observation"])
+
+        for path in paths:
+            path["action"] = expert_policy.get_action(path["observation"])
         return paths
 
     ####################################
