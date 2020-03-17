@@ -159,7 +159,7 @@ class RL_Trainer(object):
                 # ``` return loaded_paths, 0, None ```
 
                 # collect data, batch_size is the number of transitions you want to collect.
-        if itr==0:
+        if itr==0 and load_initial_expertdata:
             print('loadn expert data from: ',load_initial_expertdata)
             with open(load_initial_expertdata, "rb") as f:
                 loaded_paths = pickle.load(f)
