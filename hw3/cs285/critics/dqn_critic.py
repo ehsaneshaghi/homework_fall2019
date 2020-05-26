@@ -42,7 +42,7 @@ class DQNCritic(BaseCritic):
             # In double Q-learning, the best action is selected using the Q-network that
             # is being updated, but the Q-value for this action is obtained from the
             # target Q-network. See page 5 of https://arxiv.org/pdf/1509.06461.pdf for more details.
-            TODO
+            pass #TODO
         else:
             # q values of the next timestep
             q_tp1 = tf.reduce_max(q_tp1_values, axis=1)
@@ -54,7 +54,7 @@ class DQNCritic(BaseCritic):
             #currentReward + self.gamma * qValuesOfNextTimestep * (1 - self.done_mask_ph)
         # HINT2: see above, where q_tp1 is defined as the q values of the next timestep
         # HINT3: see the defined placeholders and look for the one that holds current rewards
-        target_q_t = TODO
+        target_q_t = self.rew_t_ph + self.gamma*self.q_tp1*(1-self.done_mask_ph) #TODO
         target_q_t = tf.stop_gradient(target_q_t)
 
         #####################
@@ -62,7 +62,7 @@ class DQNCritic(BaseCritic):
         # TODO compute the Bellman error (i.e. TD error between q_t and target_q_t)
         # Note that this scalar-valued tensor later gets passed into the optimizer, to be minimized
         # HINT: use reduce mean of huber_loss (from infrastructure/dqn_utils.py) instead of squared error
-        self.total_error= TODO
+        self.total_error= huber_loss(target_q_t - self.q_t) #TODO
 
         #####################
 
@@ -70,8 +70,8 @@ class DQNCritic(BaseCritic):
         # variables of the Q-function network and target network, respectively
         # HINT1: see the "scope" under which the variables were constructed in the lines at the top of this function
         # HINT2: use tf.get_collection to look for all variables under a certain scope
-        q_func_vars = TODO
-        target_q_func_vars = TODO
+        q_func_vars = tf.get_collection(scope='q_func') #TODO
+        target_q_func_vars = tf.get_collection(scope='target_q_func')#TODO
 
         #####################
 
